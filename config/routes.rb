@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :users
+  devise_for :users do
+    get "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
+  end
+  # devise_for :users do
+  #   get '/users/sign_out' => 'devise/sessions#destroy' # This is an alternative to method: :delete
+  # end
+  resources :users, only: [:show, :update, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

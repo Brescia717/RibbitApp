@@ -3,28 +3,30 @@
 <head>
     <link rel="stylesheet/less" href="/style.less">
     <script src="/less.js"></script>
+    <%= javascript_include_tag :defaults %>
   <!--   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p> -->
 </head>
 <body>
-    <header>
-        <div class="wrapper">
-            <img src="/gfx/logo.png">
-            <span>Twitter Clone</span>
-        </div>
-    </header>
-    <div id="content">
-        <div class="wrapper">
-            <% flash.each do |name, msg| %>
-                <%= content_tag :div, msg, class: "flash #{name}" %>
-            <% end %>
-            <%= yield %>
-        </div>
+  <header>
+    <div class="wrapper">
+      <img src="/gfx/logo.png">
+      <span>Twitter Clone</span>
     </div>
-    <footer>
-        <div class="wrapper">
-            Ribbit - A Twitter Clone Tutorial<img src="/gfx/logo-nettuts.png">
-        </div>
-    </footer>
+  </header>
+  <%= render 'layouts/nav' %>
+  <div id="content">
+    <div class="wrapper">
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: "flash #{name}" %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+  <footer>
+    <div class="wrapper">
+        Ribbit - A Twitter Clone Tutorial<img src="/gfx/logo-nettuts.png">
+    </div>
+  </footer>
 </body>
 </html>
