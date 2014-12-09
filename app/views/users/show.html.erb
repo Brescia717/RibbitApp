@@ -1,10 +1,10 @@
 <div id="createRibbit" class="panel right">
     <h1>Create a Ribbit</h1>
     <p>
-    <form>
-        <textarea name="text" class="ribbitText"></textarea>
-        <input type="submit" value="Ribbit!">
-    </form>
+      <%= form_for @ribbit do |f| %>
+        <%= f.text_area :content, class: 'ribbitText' %>
+        <%= f.submit "Ribbit!" %>
+      <% end %>
     </p>
 </div>
 <div id="ribbits" class="panel left">
@@ -13,7 +13,7 @@
         <img class="avatar" src="<%= @user.avatar_url %>">
         <span class="name"><%= @user.username %></span>
         <p>
-        XX Ribbits
+        <%= @user.ribbits.size %> Ribbits
         <span class="spacing">XX Followers</span>
         <span class="spacing">XX Following</span>
         </p>
@@ -21,7 +21,12 @@
 </div>
 <div class="panel left">
     <h1>Your Ribbits</h1>
+    <% @user.ribbits.each do |ribbit| %>
     <div class="ribbitWrapper">
-        Ribbits coming . . .
+      <img class="avatar" src="<%= @user.avatar_url %>">
+      <span class="name"><%= @user.username %></span>
+      <span class="time"><%= time_ago_in_words(ribbit.created_at) %></span>
+      <p> <%= ribbit.content %> </p>
     </div>
+    <% end %>
 </div>
