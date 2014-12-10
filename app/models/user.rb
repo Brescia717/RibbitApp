@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
   # before_action :authenticate_user!
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true
+
+  has_many :ribbits
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
 
