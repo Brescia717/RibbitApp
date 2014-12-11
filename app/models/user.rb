@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   has_many :followers, through: :follower_relationships
   has_many :followeds, through: :followed_relationships
 
-  def following? user
-    self.followeds.include? user
+  def following?(user)
+    self.followeds.include?(user)
   end
 
   def follow user
-    Relationship.create follower_id: self.id, followed_id: user.id
+    Relationship.create follower_id: self.id, followed_id: @user.id
   end
 
   # This is in addition to a real persisted field like 'username'
