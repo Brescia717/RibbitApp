@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   # devise_for :users do
   #   get '/users/sign_out' => 'devise/sessions#destroy' # This is an alternative to method: :delete
   # end
-  resources :users, only: [:show, :update, :destroy]
+  resources :users
+  get 'buddies', to: 'users#buddies', as: 'buddies'
   resources :ribbits
   resources :relationships
 
