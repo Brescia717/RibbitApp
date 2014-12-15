@@ -27,14 +27,18 @@ class UsersController < ApplicationController
   end
 
   def buddies
+    @buddies_ids = []
+    @current_user = current_user
     if current_user
       @ribbit = Ribbit.new
-      @buddies_ids = current_user.followeds.map(&:id).push(current_user.id)
-      @ribbits = Ribbit.find_by(user_id: @buddies_ids)
+      @current_user.followeds.each do |f|
+        @buddies_ids << f.id#.map(&:id).push(current_user.id)
+      end
+      @ribbits = Ribbit.where(user_id: @buddies_ids)
     else
       redirect_to root_url
     end
-    binding.pry
+
   end
 
   private
