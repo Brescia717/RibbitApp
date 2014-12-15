@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
+  def index
+    @users = User.all
+  end
+
   def show
     @user = User.find(params[:id])
     @ribbit = Ribbit.new
@@ -20,6 +24,17 @@ class UsersController < ApplicationController
       # flash[:alert] = "You need to submit a photo."
       render 'show'
     end
+  end
+
+  def buddies
+    if current_user
+      @ribbit = Ribbit.new
+      @buddies_ids = current_user.followeds.map(&:id).push(current_user.id)
+      @ribbits = Ribbit.find_by(user_id: @buddies_ids)
+    else
+      redirect_to root_url
+    end
+    binding.pry
   end
 
   private
